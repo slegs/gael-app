@@ -25,14 +25,14 @@ export const colors = {
   gray7: '#26272D',
   gray8: '#141417',
 
-  blue0: '#c1ffb8',  // Light Gael green
-  blue1: '#8cf777',  // Medium light Gael green
-  blue2: '#5eee56',  // Medium Gael green
-  blue3: '#2ECC40',  // Main Gael green
-  blue4: '#25a336',  // Medium dark Gael green
-  blue5: '#1d7d2a',  // Dark Gael green
-  blue6: '#15591e',  // Darker Gael green
-  blue7: '#0d3612',  // Darkest Gael green
+  blue0: '#a8b5b6',  // Light dark green
+  blue1: '#7a9295',  // Medium light dark green
+  blue2: '#4c6e73',  // Medium dark green
+  blue3: '#122023',  // Main dark Gael green
+  blue4: '#0e1a1c',  // Darker Gael green
+  blue5: '#0a1315',  // Very dark Gael green
+  blue6: '#060d0e',  // Darkest Gael green
+  blue7: '#020607',  // Ultra dark Gael green
 
   red1: '#ffe6eb',
   red2: '#fba2b2',
@@ -54,21 +54,21 @@ export const colors = {
   purple4: '#6d00fa',
   purple5: '#380080',
 
-  green1: '#c1ffb8',
-  green2: '#27f406',
-  green3: '#20bc07',
-  green4: '#148203',
-  green5: '#082b03',
+  green1: '#c1ffb8',  // Keep bright green tones for positive actions
+  green2: '#5eee56',  // Medium bright green
+  green3: '#2ECC40',  // Main bright Gael green (now accent)
+  green4: '#25a336',  // Darker bright green
+  green5: '#1d7d2a',  // Dark bright green
 
   unreadNotifBg: '#ebf6ff',
-  brandBlue: '#2ECC40',  // Changed to Gael green
+  brandBlue: '#122023',  // Changed to dark Gael green
   like: '#ec4899',
 }
 
 export const gradients = {
-  blueLight: {start: '#52CC5E', end: colors.blue3}, // buttons - light green to Gael green
-  blue: {start: '#45CC55', end: colors.blue3}, // fab - medium green to Gael green
-  blueDark: {start: '#38CC4A', end: colors.blue3}, // avis, banner - darker green to Gael green
+  blueLight: {start: '#4c6e73', end: colors.blue3}, // buttons - medium to dark green
+  blue: {start: '#2a4a4f', end: colors.blue3}, // fab - darker to dark green
+  blueDark: {start: '#1e363a', end: colors.blue3}, // avis, banner - very dark to dark green
 }
 
 /**
