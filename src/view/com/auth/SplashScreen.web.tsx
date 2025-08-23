@@ -86,7 +86,7 @@ export const SplashScreen = ({
           ]}>
           <ErrorBoundary>
             <View style={[a.justify_center, a.align_center]}>
-              <Logo width={kawaii ? 300 : 92} fill="sky" />
+              <Logo width={kawaii ? 300 : 92} fill="#2ECC40" />
 
               {!kawaii && (
                 <View style={[a.pb_sm, a.pt_5xl]}>
