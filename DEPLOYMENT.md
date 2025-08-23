@@ -2,6 +2,7 @@
 
 This guide covers deploying the Gael Social web client to AWS S3 + CloudFront using GitHub Actions.
 
+
 ## Prerequisites
 
 ### 1. AWS Resources Setup
