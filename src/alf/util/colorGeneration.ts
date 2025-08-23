@@ -1,8 +1,8 @@
 import {logger} from '#/logger'
 
-export const BLUE_HUE = 211
+export const BLUE_HUE = 130  // Changed to Gael green (#2ECC40)
 export const RED_HUE = 346
-export const GREEN_HUE = 152
+export const GREEN_HUE = 130  // Using Gael green for both primary and positive
 
 /**
  * Smooth progression of lightness "stops" for generating HSL colors.

@@ -25,14 +25,14 @@ export const colors = {
   gray7: '#26272D',
   gray8: '#141417',
 
-  blue0: '#bfe1ff',
-  blue1: '#8bc7fd',
-  blue2: '#52acfe',
-  blue3: '#0085ff',
-  blue4: '#0062bd',
-  blue5: '#034581',
-  blue6: '#012561',
-  blue7: '#001040',
+  blue0: '#c1ffb8',  // Light Gael green
+  blue1: '#8cf777',  // Medium light Gael green
+  blue2: '#5eee56',  // Medium Gael green
+  blue3: '#2ECC40',  // Main Gael green
+  blue4: '#25a336',  // Medium dark Gael green
+  blue5: '#1d7d2a',  // Dark Gael green
+  blue6: '#15591e',  // Darker Gael green
+  blue7: '#0d3612',  // Darkest Gael green
 
   red1: '#ffe6eb',
   red2: '#fba2b2',
@@ -61,14 +61,14 @@ export const colors = {
   green5: '#082b03',
 
   unreadNotifBg: '#ebf6ff',
-  brandBlue: '#0066FF',
+  brandBlue: '#2ECC40',  // Changed to Gael green
   like: '#ec4899',
 }
 
 export const gradients = {
-  blueLight: {start: '#5A71FA', end: colors.blue3}, // buttons
-  blue: {start: '#5E55FB', end: colors.blue3}, // fab
-  blueDark: {start: '#5F45E0', end: colors.blue3}, // avis, banner
+  blueLight: {start: '#52CC5E', end: colors.blue3}, // buttons - light green to Gael green
+  blue: {start: '#45CC55', end: colors.blue3}, // fab - medium green to Gael green
+  blueDark: {start: '#38CC4A', end: colors.blue3}, // avis, banner - darker green to Gael green
 }
 
 /**
