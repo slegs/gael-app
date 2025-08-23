@@ -33,9 +33,9 @@ module.exports = function (_config) {
   return {
     expo: {
       version: VERSION,
-      name: 'Bluesky',
-      slug: 'bluesky',
-      scheme: 'bluesky',
+      name: 'Gael',
+      slug: 'gael',
+      scheme: 'gael',
       owner: 'blueskysocial',
       runtimeVersion: {
         policy: 'appVersion',
@@ -45,7 +45,7 @@ module.exports = function (_config) {
       primaryColor: '#122023',
       ios: {
         supportsTablet: false,
-        bundleIdentifier: 'xyz.blueskyweb.app',
+        bundleIdentifier: 'social.gael.app',
         config: {
           usesNonExemptEncryption: false,
         },
@@ -59,7 +59,7 @@ module.exports = function (_config) {
             'Used to save images to your library.',
           NSPhotoLibraryUsageDescription:
             'Used for profile pictures, posts, and other kinds of content',
-          CFBundleSpokenName: 'Blue Sky',
+          CFBundleSpokenName: 'Gael',
           CFBundleLocalizations: [
             'en',
             'an',
@@ -149,7 +149,7 @@ module.exports = function (_config) {
           backgroundColor: '#122023',
         },
         googleServicesFile: './google-services.json',
-        package: 'xyz.blueskyweb.app',
+        package: 'social.gael.app',
         intentFilters: [
           {
             action: 'VIEW',
