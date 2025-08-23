@@ -4,7 +4,7 @@ import {useWindowDimensions} from 'react-native'
 import {msg, Trans} from '@lingui/macro'
 import {useLingui} from '@lingui/react'
 
-import {BSKY_SERVICE} from '#/lib/constants'
+import {BSKY_SERVICE, GAEL_SERVICE} from '#/lib/constants'
 import {logEvent} from '#/lib/statsig/statsig'
 import * as persisted from '#/state/persisted'
 import {useSession} from '#/state/session'
@@ -29,19 +29,19 @@ export function ServerInputDialog({
   const formRef = useRef<DialogInnerRef>(null)
 
   // persist these options between dialog open/close
-  const [fixedOption, setFixedOption] = useState(BSKY_SERVICE)
+  const [fixedOption, setFixedOption] = useState(GAEL_SERVICE)
   const [previousCustomAddress, setPreviousCustomAddress] = useState('')
 
   const onClose = useCallback(() => {
     const result = formRef.current?.getFormState()
     if (result) {
       onSelect(result)
-      if (result !== BSKY_SERVICE) {
+      if (result !== GAEL_SERVICE && result !== BSKY_SERVICE) {
         setPreviousCustomAddress(result)
       }
     }
     logEvent('signin:hostingProviderPressed', {
-      hostingProviderDidChange: fixedOption !== BSKY_SERVICE,
+      hostingProviderDidChange: fixedOption !== GAEL_SERVICE,
     })
   }, [onSelect, fixedOption])
 
@@ -133,6 +133,9 @@ function DialogInner({
           label="Preferences"
           values={[fixedOption]}
           onChange={values => setFixedOption(values[0])}>
+          <ToggleButton.Button name={GAEL_SERVICE} label={_(msg`Gael`)}>
+            <ToggleButton.ButtonText>{_(msg`Gael`)}</ToggleButton.ButtonText>
+          </ToggleButton.Button>
           <ToggleButton.Button name={BSKY_SERVICE} label={_(msg`Bluesky`)}>
             <ToggleButton.ButtonText>{_(msg`Bluesky`)}</ToggleButton.ButtonText>
           </ToggleButton.Button>
@@ -144,12 +147,20 @@ function DialogInner({
           </ToggleButton.Button>
         </ToggleButton.Group>
 
+        {fixedOption === GAEL_SERVICE && isFirstTimeUser && (
+          <Admonition type="tip">
+            <Trans>
+              You are connecting to Gael Social. This is an open network where you 
+              can choose your own provider. Gael Social is your default option.
+            </Trans>
+          </Admonition>
+        )}
+
         {fixedOption === BSKY_SERVICE && isFirstTimeUser && (
           <Admonition type="tip">
             <Trans>
               Bluesky is an open network where you can choose your own provider.
-              If you're new here, we recommend sticking with the default Bluesky
-              Social option.
+              You are connecting to the official Bluesky Social network.
             </Trans>
           </Admonition>
         )}

@@ -49,16 +49,54 @@ module.exports = async function (env, argv) {
   if (process.env.SENTRY_AUTH_TOKEN) {
     config.plugins.push(
       sentryWebpackPlugin({
-        org: 'blueskyweb',
-        project: 'app',
+        org: process.env.SENTRY_ORG || 'gael-social',
+        project: process.env.SENTRY_PROJECT || 'gael-app',
         authToken: process.env.SENTRY_AUTH_TOKEN,
         release: {
-          // fallback needed for Render.com deployments
+          // fallback needed for deployments
           name: process.env.SENTRY_RELEASE || version,
           dist: process.env.SENTRY_DIST,
         },
       }),
     )
+  }
+
+  // Production optimizations
+  if (env.mode === 'production') {
+    // Optimize chunk splitting
+    config.optimization = {
+      ...config.optimization,
+      splitChunks: {
+        ...config.optimization?.splitChunks,
+        chunks: 'all',
+        cacheGroups: {
+          vendor: {
+            test: /[\\/]node_modules[\\/]/,
+            name: 'vendors',
+            chunks: 'all',
+            priority: 10,
+            reuseExistingChunk: true,
+          },
+          common: {
+            name: 'common',
+            minChunks: 2,
+            chunks: 'all',
+            priority: 5,
+            reuseExistingChunk: true,
+          },
+        },
+      },
+      // Enable long-term caching
+      moduleIds: 'deterministic',
+      chunkIds: 'deterministic',
+    }
+
+    // Add performance budgets
+    config.performance = {
+      maxAssetSize: 1000000, // 1MB
+      maxEntrypointSize: 1000000, // 1MB
+      hints: 'warning',
+    }
   }
   return config
 }

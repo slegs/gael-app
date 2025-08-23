@@ -1,0 +1,17 @@
+# Global owners (Optional for solo developer - uncomment if you want self-review reminders)
+# * @paulwalsh
+
+# Critical infrastructure and deployment files (Recommended to keep)
+.github/workflows/ @paulwalsh
+.github/CODEOWNERS @paulwalsh
+SECURITY.md @paulwalsh
+DEPLOYMENT.md @paulwalsh
+
+# Environment and configuration files (Optional - for safety)
+.env* @paulwalsh
+*.config.js @paulwalsh
+app.config.js @paulwalsh
+
+# Server configuration changes (Recommended for security)
+src/lib/constants.ts @paulwalsh
+src/view/com/auth/ @paulwalsh

@@ -1,0 +1,119 @@
+name: Deploy Production
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'assets/**'
+      - 'web/**'
+      - 'package.json'
+      - 'yarn.lock'
+      - 'app.config.js'
+      - 'babel.config.js'
+      - 'metro.config.js'
+      - 'webpack.config.js'
+      - '.github/workflows/deploy-web.yml'
+  workflow_dispatch:
+
+env:
+  NODE_VERSION: '20'
+  YARN_CACHE_FOLDER: ~/.yarn
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    environment: 
+      name: prod
+      url: https://${{ vars.CUSTOM_DOMAIN || vars.CLOUDFRONT_DOMAIN }}
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'yarn'
+
+    - name: Get yarn cache directory path
+      id: yarn-cache-dir-path
+      run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+    - name: Cache yarn dependencies
+      uses: actions/cache@v4
+      with:
+        path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-yarn-
+
+    - name: Cache node_modules
+      uses: actions/cache@v4
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-node-modules-
+
+    - name: Install dependencies
+      run: yarn install --frozen-lockfile --prefer-offline
+
+    - name: Build internationalization
+      run: yarn intl:build
+
+    - name: Build web application
+      run: yarn build-web
+      env:
+        NODE_ENV: production
+        EXPO_PUBLIC_ENV: production
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - name: Deploy to S3
+      run: |
+        # Sync files to S3 with proper cache headers
+        aws s3 sync web-build/ s3://${{ secrets.S3_BUCKET_NAME }}/ \
+          --delete \
+          --exclude "*.html" \
+          --cache-control "public,max-age=31536000,immutable"
+        
+        # Upload HTML files with no-cache headers
+        aws s3 sync web-build/ s3://${{ secrets.S3_BUCKET_NAME }}/ \
+          --exclude "*" \
+          --include "*.html" \
+          --cache-control "public,max-age=0,must-revalidate" \
+          --content-type "text/html"
+
+    - name: Invalidate CloudFront distribution
+      run: |
+        aws cloudfront create-invalidation \
+          --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} \
+          --paths "/*"
+
+    - name: Deployment summary
+      run: |
+        echo "🚀 Deployment completed successfully!" >> $GITHUB_STEP_SUMMARY
+        echo "📦 Build size: $(du -sh web-build | cut -f1)" >> $GITHUB_STEP_SUMMARY
+        echo "🔗 Website URL: https://${{ vars.CUSTOM_DOMAIN || vars.CLOUDFRONT_DOMAIN }}" >> $GITHUB_STEP_SUMMARY
+        echo "⏰ Deployed at: $(date -u)" >> $GITHUB_STEP_SUMMARY
+
+  notify-deployment:
+    runs-on: ubuntu-latest
+    needs: build-and-deploy
+    if: always()
+    steps:
+    - name: Notify deployment status
+      run: |
+        if [ "${{ needs.build-and-deploy.result }}" = "success" ]; then
+          echo "✅ Deployment successful"
+        else
+          echo "❌ Deployment failed"
+          exit 1
+        fi
