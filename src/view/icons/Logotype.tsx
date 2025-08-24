@@ -18,7 +18,7 @@ export function Logotype({
     return (
       <Svg
         fill="none"
-        viewBox="962 305 330 145"
+        viewBox="945 305 350 145"
         {...rest}
         width={size}
         height={Number(size) * (135 / 330)}>

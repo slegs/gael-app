@@ -47,7 +47,8 @@ export function HomeHeaderLayoutMobile({
         headerHeight.set(e.nativeEvent.layout.height)
       }}>
       <Layout.Header.Outer noBottomBorder>
-        <Layout.Header.Slot>
+        <Layout.Header.Slot
+          style={[{marginLeft: -Layout.BUTTON_VISUAL_ALIGNMENT_OFFSET}]}>
           <Layout.Header.MenuButton />
         </Layout.Header.Slot>
 

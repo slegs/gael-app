@@ -1,5 +1,5 @@
-import {ComponentProps} from 'react'
-import {StyleSheet, TouchableWithoutFeedback} from 'react-native'
+import {type ComponentProps} from 'react'
+import {StyleSheet, type TouchableWithoutFeedback} from 'react-native'
 import Animated from 'react-native-reanimated'
 import {useSafeAreaInsets} from 'react-native-safe-area-context'
 import {LinearGradient} from 'expo-linear-gradient'
@@ -12,6 +12,8 @@ import {clamp} from '#/lib/numbers'
 import {gradients} from '#/lib/styles'
 import {isWeb} from '#/platform/detection'
 import {ios} from '#/alf'
+import {GAEL_BRAND_COLORS} from '#/alf/gael/colors'
+import {USE_GAEL_THEME} from '#/alf/gael/theme'
 
 export interface FABProps
   extends ComponentProps<typeof TouchableWithoutFeedback> {
@@ -30,6 +32,11 @@ export function FABInner({testID, icon, onPress, ...props}: FABProps) {
   const tabletSpacing = isTablet
     ? {right: 50, bottom: 50}
     : {right: 24, bottom: clamp(insets.bottom, 15, 60) + 15}
+
+  // Use Gael colors when theme is enabled, otherwise use original blue
+  const gradientColors = USE_GAEL_THEME
+    ? [GAEL_BRAND_COLORS.green600, GAEL_BRAND_COLORS.green700]
+    : [gradients.blueLight.start, gradients.blueLight.end]
 
   return (
     <Animated.View
@@ -53,7 +60,7 @@ export function FABInner({testID, icon, onPress, ...props}: FABProps) {
         targetScale={0.9}
         {...props}>
         <LinearGradient
-          colors={[gradients.blueLight.start, gradients.blueLight.end]}
+          colors={gradientColors}
           start={{x: 0, y: 0}}
           end={{x: 1, y: 1}}
           style={[styles.inner, size]}>

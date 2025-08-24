@@ -18,7 +18,7 @@ export function GaelLogomark({
   return (
     <Svg
       fill="none"
-      viewBox="760 270 160 200"
+      viewBox="750 260 220 220"
       {...rest}
       width={size}
       height={size}>
