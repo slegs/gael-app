@@ -7,6 +7,7 @@ import {
   setFontFamily as persistFontFamily,
   setFontScale as persistFontScale,
 } from '#/alf/fonts'
+import {GAEL_THEME_HUES, USE_GAEL_THEME} from '#/alf/gael/theme'
 import {createThemes, defaultTheme} from '#/alf/themes'
 import {type Theme, type ThemeName} from '#/alf/types'
 import {BLUE_HUE, GREEN_HUE, RED_HUE} from '#/alf/util/colorGeneration'
@@ -46,11 +47,13 @@ export const Context = React.createContext<Alf>({
   themeName: 'light',
   theme: defaultTheme,
   themes: createThemes({
-    hues: {
-      primary: BLUE_HUE,
-      negative: RED_HUE,
-      positive: GREEN_HUE,
-    },
+    hues: USE_GAEL_THEME
+      ? GAEL_THEME_HUES
+      : {
+          primary: BLUE_HUE,
+          negative: RED_HUE,
+          positive: GREEN_HUE,
+        },
   }),
   fonts: {
     scale: getFontScale(),
@@ -97,11 +100,13 @@ export function ThemeProvider({
   )
   const themes = React.useMemo(() => {
     return createThemes({
-      hues: {
-        primary: BLUE_HUE,
-        negative: RED_HUE,
-        positive: GREEN_HUE,
-      },
+      hues: USE_GAEL_THEME
+        ? GAEL_THEME_HUES
+        : {
+            primary: BLUE_HUE,
+            negative: RED_HUE,
+            positive: GREEN_HUE,
+          },
     })
   }, [])
 

@@ -14,21 +14,21 @@
 :root {
   --text: black;
   --background: white;
-  --backgroundLight: hsl(197, 20%, 95%);
+  --backgroundLight: hsl(211, 20%, 95%);
 }
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: dark;
     --text: white;
     --background: black;
-    --backgroundLight: hsl(197, 20%, 20%);
+    --backgroundLight: hsl(211, 20%, 20%);
   }
 }
 
 html.theme--light {
   --text: black;
   --background: white;
-  --backgroundLight: hsl(197, 20%, 95%);
+  --backgroundLight: hsl(211, 20%, 95%);
   background-color: white;
 }
 html.theme--dark {
@@ -36,14 +36,14 @@ html.theme--dark {
   background-color: black;
   --text: white;
   --background: black;
-  --backgroundLight: hsl(197, 20%, 20%);
+  --backgroundLight: hsl(211, 20%, 20%);
 }
 html.theme--dim {
   color-scheme: dark;
-  background-color: hsl(197, 28%, 12%);
+  background-color: hsl(211, 28%, 12%);
   --text: white;
-  --background: hsl(197, 20%, 4%);
-  --backgroundLight: hsl(197, 20%, 10%);
+  --background: hsl(211, 20%, 4%);
+  --backgroundLight: hsl(211, 20%, 10%);
 }
 
 /* Buttons and inputs have a font set by UA, so we'll have to reset that */
@@ -109,11 +109,26 @@ a[role='link'][data-no-underline='1']:hover {
   pointer-events: none;
 }
 .ProseMirror .mention {
-  color: #122023;
+  color: #15803d;
 }
 .ProseMirror a,
 .ProseMirror .autolink {
-  color: #122023;
+  color: #15803d;
+}
+/* Dark mode overrides */
+html.theme--dark .ProseMirror .mention {
+  color: #16a34a;
+}
+html.theme--dark .ProseMirror a,
+html.theme--dark .ProseMirror .autolink {
+  color: #16a34a;
+}
+html.theme--dim .ProseMirror .mention {
+  color: #16a34a;
+}
+html.theme--dim .ProseMirror a,
+html.theme--dim .ProseMirror .autolink {
+  color: #16a34a;
 }
 /* OLLIE: TODO -- this is not accessible */
 /* Remove focus state on inputs */

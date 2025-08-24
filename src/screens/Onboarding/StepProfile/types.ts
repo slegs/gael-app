@@ -1,3 +1,4 @@
+import {getGaelColor} from '#/alf/gael/components'
 import {Alien_Stroke2_Corner0_Rounded as Alien} from '#/components/icons/Alien'
 import {Apple_Stroke2_Corner0_Rounded as Apple} from '#/components/icons/Apple'
 import {At_Stroke2_Corner0_Rounded as At} from '#/components/icons/At'
@@ -117,7 +118,7 @@ export const avatarColors = [
   '#FE8311',
   '#FED811',
   '#73DF84',
-  '#122023',
+  getGaelColor('profile', 'avatarOption'), // Replaces #1185FE with Gael color
   '#EF75EA',
   '#F55454',
 ] as const

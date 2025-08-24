@@ -1,5 +1,7 @@
 import {atoms} from '#/alf/atoms'
-import {Palette, Theme} from '#/alf/types'
+import {GAEL_BRAND_COLORS} from '#/alf/gael/colors'
+import {GAEL_THEME_HUES, USE_GAEL_THEME} from '#/alf/gael/theme'
+import {type Palette, type Theme} from '#/alf/types'
 import {
   BLUE_HUE,
   defaultScale,
@@ -8,12 +10,23 @@ import {
   RED_HUE,
 } from '#/alf/util/colorGeneration'
 
+// Debug: Log which theme is being used
+console.log(
+  'Theme system:',
+  USE_GAEL_THEME ? 'GAEL' : 'BLUESKY',
+  USE_GAEL_THEME
+    ? GAEL_THEME_HUES
+    : {primary: BLUE_HUE, negative: RED_HUE, positive: GREEN_HUE},
+)
+
 const themes = createThemes({
-  hues: {
-    primary: BLUE_HUE,
-    negative: RED_HUE,
-    positive: GREEN_HUE,
-  },
+  hues: USE_GAEL_THEME
+    ? GAEL_THEME_HUES
+    : {
+        primary: BLUE_HUE,
+        negative: RED_HUE,
+        positive: GREEN_HUE,
+      },
 })
 
 /**
@@ -79,19 +92,19 @@ export function createThemes({
     gray_975: `hsl(${hues.primary}, 28%, ${defaultScale[1]}%)`,
     gray_1000: `hsl(${hues.primary}, 28%, ${defaultScale[0]}%)`,
 
-    primary_25: `hsl(${hues.primary}, 15%, 95%)`,
-    primary_50: `hsl(${hues.primary}, 20%, 90%)`,
-    primary_100: `hsl(${hues.primary}, 25%, 80%)`,
-    primary_200: `hsl(${hues.primary}, 30%, 65%)`,
-    primary_300: `hsl(${hues.primary}, 35%, 50%)`,
-    primary_400: `hsl(${hues.primary}, 40%, 35%)`,
-    primary_500: `hsl(${hues.primary}, 33%, 11%)`,
-    primary_600: `hsl(${hues.primary}, 35%, 9%)`,
-    primary_700: `hsl(${hues.primary}, 40%, 7%)`,
-    primary_800: `hsl(${hues.primary}, 45%, 5%)`,
-    primary_900: `hsl(${hues.primary}, 50%, 3%)`,
-    primary_950: `hsl(${hues.primary}, 55%, 2%)`,
-    primary_975: `hsl(${hues.primary}, 60%, 1%)`,
+    primary_25: `hsl(${hues.primary}, 99%, 97%)`,
+    primary_50: `hsl(${hues.primary}, 99%, 95%)`,
+    primary_100: `hsl(${hues.primary}, 99%, 90%)`,
+    primary_200: `hsl(${hues.primary}, 99%, 80%)`,
+    primary_300: `hsl(${hues.primary}, 99%, 70%)`,
+    primary_400: `hsl(${hues.primary}, 99%, 60%)`,
+    primary_500: `hsl(${hues.primary}, 99%, 53%)`,
+    primary_600: `hsl(${hues.primary}, 99%, 42%)`,
+    primary_700: `hsl(${hues.primary}, 99%, 34%)`,
+    primary_800: `hsl(${hues.primary}, 99%, 26%)`,
+    primary_900: `hsl(${hues.primary}, 99%, 18%)`,
+    primary_950: `hsl(${hues.primary}, 99%, 10%)`,
+    primary_975: `hsl(${hues.primary}, 99%, 7%)`,
 
     green_25: `hsl(${hues.positive}, 82%, 97%)`,
     green_50: `hsl(${hues.positive}, 82%, 95%)`,
@@ -147,8 +160,12 @@ export function createThemes({
     primary_200: color.primary_200,
     primary_300: color.primary_300,
     primary_400: color.primary_400,
-    primary_500: color.primary_500,
-    primary_600: color.primary_600,
+    primary_500: USE_GAEL_THEME
+      ? GAEL_BRAND_COLORS.green700
+      : color.primary_500,
+    primary_600: USE_GAEL_THEME
+      ? GAEL_BRAND_COLORS.darkGreen
+      : color.primary_600,
     primary_700: color.primary_700,
     primary_800: color.primary_800,
     primary_900: color.primary_900,
@@ -209,8 +226,12 @@ export function createThemes({
     primary_200: color.primary_800,
     primary_300: color.primary_700,
     primary_400: color.primary_600,
-    primary_500: color.primary_500,
-    primary_600: color.primary_400,
+    primary_500: USE_GAEL_THEME
+      ? GAEL_BRAND_COLORS.green600
+      : color.primary_500,
+    primary_600: USE_GAEL_THEME
+      ? GAEL_BRAND_COLORS.green500
+      : color.primary_400,
     primary_700: color.primary_300,
     primary_800: color.primary_200,
     primary_900: color.primary_100,
@@ -265,19 +286,23 @@ export function createThemes({
     contrast_950: `hsl(${hues.primary}, 20%, ${dimScale[12]}%)`,
     contrast_975: `hsl(${hues.primary}, 20%, ${dimScale[13]}%)`,
 
-    primary_25: `hsl(${hues.primary}, 15%, ${dimScale[1]}%)`,
-    primary_50: `hsl(${hues.primary}, 20%, ${dimScale[2]}%)`,
-    primary_100: `hsl(${hues.primary}, 25%, ${dimScale[3]}%)`,
-    primary_200: `hsl(${hues.primary}, 30%, ${dimScale[4]}%)`,
-    primary_300: `hsl(${hues.primary}, 35%, ${dimScale[5]}%)`,
-    primary_400: `hsl(${hues.primary}, 40%, ${dimScale[6]}%)`,
-    primary_500: `hsl(${hues.primary}, 50%, ${dimScale[7]}%)`,
-    primary_600: `hsl(${hues.primary}, 55%, ${dimScale[8]}%)`,
-    primary_700: `hsl(${hues.primary}, 60%, ${dimScale[9]}%)`,
-    primary_800: `hsl(${hues.primary}, 65%, ${dimScale[10]}%)`,
-    primary_900: `hsl(${hues.primary}, 70%, ${dimScale[11]}%)`,
-    primary_950: `hsl(${hues.primary}, 75%, ${dimScale[12]}%)`,
-    primary_975: `hsl(${hues.primary}, 80%, ${dimScale[13]}%)`,
+    primary_25: `hsl(${hues.primary}, 50%, ${dimScale[1]}%)`,
+    primary_50: `hsl(${hues.primary}, 60%, ${dimScale[2]}%)`,
+    primary_100: `hsl(${hues.primary}, 70%, ${dimScale[3]}%)`,
+    primary_200: `hsl(${hues.primary}, 82%, ${dimScale[4]}%)`,
+    primary_300: `hsl(${hues.primary}, 90%, ${dimScale[5]}%)`,
+    primary_400: `hsl(${hues.primary}, 95%, ${dimScale[6]}%)`,
+    primary_500: USE_GAEL_THEME
+      ? GAEL_BRAND_COLORS.green600
+      : `hsl(${hues.primary}, 99%, ${dimScale[7]}%)`,
+    primary_600: USE_GAEL_THEME
+      ? GAEL_BRAND_COLORS.green500
+      : `hsl(${hues.primary}, 99%, ${dimScale[8]}%)`,
+    primary_700: `hsl(${hues.primary}, 99%, ${dimScale[9]}%)`,
+    primary_800: `hsl(${hues.primary}, 99%, ${dimScale[10]}%)`,
+    primary_900: `hsl(${hues.primary}, 99%, ${dimScale[11]}%)`,
+    primary_950: `hsl(${hues.primary}, 99%, ${dimScale[12]}%)`,
+    primary_975: `hsl(${hues.primary}, 99%, ${dimScale[13]}%)`,
 
     positive_25: `hsl(${hues.positive}, 50%, ${dimScale[1]}%)`,
     positive_50: `hsl(${hues.positive}, 60%, ${dimScale[2]}%)`,

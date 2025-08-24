@@ -1,8 +1,8 @@
 import {logger} from '#/logger'
 
-export const BLUE_HUE = 197  // Changed to dark Gael green (#122023)
+export const BLUE_HUE = 211
 export const RED_HUE = 346
-export const GREEN_HUE = 130  // Keep bright green (#2ECC40) for positive/accent
+export const GREEN_HUE = 152
 
 /**
  * Smooth progression of lightness "stops" for generating HSL colors.

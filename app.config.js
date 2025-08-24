@@ -33,19 +33,19 @@ module.exports = function (_config) {
   return {
     expo: {
       version: VERSION,
-      name: 'Gael',
-      slug: 'gael',
-      scheme: 'gael',
+      name: 'Bluesky',
+      slug: 'bluesky',
+      scheme: 'bluesky',
       owner: 'blueskysocial',
       runtimeVersion: {
         policy: 'appVersion',
       },
       icon: './assets/app-icons/ios_icon_default_light.png',
       userInterfaceStyle: 'automatic',
-      primaryColor: '#122023',
+      primaryColor: '#1083fe',
       ios: {
         supportsTablet: false,
-        bundleIdentifier: 'social.gael.app',
+        bundleIdentifier: 'xyz.blueskyweb.app',
         config: {
           usesNonExemptEncryption: false,
         },
@@ -59,7 +59,7 @@ module.exports = function (_config) {
             'Used to save images to your library.',
           NSPhotoLibraryUsageDescription:
             'Used for profile pictures, posts, and other kinds of content',
-          CFBundleSpokenName: 'Gael',
+          CFBundleSpokenName: 'Blue Sky',
           CFBundleLocalizations: [
             'en',
             'an',
@@ -146,10 +146,10 @@ module.exports = function (_config) {
           foregroundImage: './assets/icon-android-foreground.png',
           monochromeImage: './assets/icon-android-foreground.png',
           backgroundImage: './assets/icon-android-background.png',
-          backgroundColor: '#122023',
+          backgroundColor: '#1185FE',
         },
         googleServicesFile: './google-services.json',
-        package: 'social.gael.app',
+        package: 'xyz.blueskyweb.app',
         intentFilters: [
           {
             action: 'VIEW',
@@ -221,7 +221,7 @@ module.exports = function (_config) {
           'expo-notifications',
           {
             icon: './assets/icon-android-notification.png',
-            color: '#122023',
+            color: '#1185fe',
             sounds: PLATFORM === 'ios' ? ['assets/dm.aiff'] : ['assets/dm.mp3'],
           },
         ],

@@ -461,7 +461,9 @@ function ChatListItemReady({
                   style={[
                     a.text_sm,
                     a.leading_snug,
-                    hasUnread ? a.font_bold : t.atoms.text_contrast_high,
+                    hasUnread
+                      ? [a.font_bold, t.atoms.text]
+                      : t.atoms.text_contrast_medium,
                     isDimStyle && t.atoms.text_contrast_medium,
                   ]}>
                   {lastMessage}
